@@ -30,6 +30,19 @@ class authAssistant(models.Model):
     
     def __str__(self):
         return self.a_name+'\t'+'\t'+str(self.committeeId)
+    
+#建立部落格的欄位資料表
+class postBlog(models.Model): 
+    authBlogId=models.ForeignKey(authCommittee,verbose_name='隸屬身份',on_delete=models.CASCADE)     #關聯立委的id
+    #Blogid=models.AutoField(auto_created = True, primary_key = True)
+    blog_title=models.CharField('標題名稱',max_length=255)         #標題名稱
+    blog_content=models.TextField('標題內容',blank=True)         #標題內容
+    #photo = models.URLField(blank=True)
+    photo=models.ImageField(upload_to='image/', blank=False, null=False)
+    blog_created_at=models.DateTimeField(auto_now = True)    #節點發建立時間  (自動獲取目前時間)
+    
+    def __str__(self):
+        return self.blog_title
 
 
 
